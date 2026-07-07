@@ -10,19 +10,24 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-    }
+{
+    Schema::create('kelurahan', function (Blueprint $table) {
+        $table->id();
+        $table->string('nama');
+
+        $table->foreignId('kecamatan_id')
+              ->constrained('kecamatan')
+              ->onDelete('cascade');
+
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('kelurahan');
     }
 };
