@@ -26,3 +26,10 @@ Route::get('/logout-manual', [AuthController::class, 'logout']);
 Route::get('/halaman-usia', function () {
     return view('halaman-usia');
 })->middleware(['auth', 'age']);
+
+use App\Http\Controllers\FileUploadController;
+
+Route::get('/upload', [FileUploadController::class, 'showUploadForm'])->name('upload.form');
+Route::post('/upload', [FileUploadController::class, 'storeFile'])->name('upload.store');
+Route::get('/files', [FileUploadController::class, 'listFiles'])->name('files.list');
+Route::delete('/files/{filename}', [FileUploadController::class, 'deleteFile'])->name('files.delete');
